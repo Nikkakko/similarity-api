@@ -20,6 +20,7 @@ export default function RootLayout({
         <Providers>
           {children}
 
+          {/* @ts-expect-error Server Component */}
           <Navbar />
         </Providers>
 
