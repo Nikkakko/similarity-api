@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { buttonVariants } from './ui/Button';
 import SignOutButton from './SignOutButton';
 import SignInButton from './SignInButton.tsx';
+import { ThemeToggle } from './ThemeToggle';
 
 const Navbar = async ({}) => {
   const session = await getServerSession();
@@ -15,10 +16,12 @@ const Navbar = async ({}) => {
           Text Similarity v1.0
         </Link>
 
-        <div className='md:hidden'>{/* <ThemeToggle /> */}</div>
+        <div className='md:hidden'>
+          <ThemeToggle />
+        </div>
 
         <div className='hidden md:flex gap-4'>
-          {/* <ThemeToggle /> */}
+          <ThemeToggle />
           <Link
             href='/documentation'
             className={buttonVariants({ variant: 'ghost' })}
