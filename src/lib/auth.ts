@@ -3,16 +3,15 @@ import { db } from './db';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import GoogleProvider from 'next-auth/providers/google';
 
-function getGoogleCredentials() {
+function getGoogleCredentials(): { clientId: string; clientSecret: string } {
   const clientId = process.env.GOOGLE_CLIENT_ID;
   const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
-
   if (!clientId || clientId.length === 0) {
-    throw new Error('No ClientID for google provider set');
+    throw new Error('Missing GOOGLE_CLIENT_ID');
   }
 
   if (!clientSecret || clientSecret.length === 0) {
-    throw new Error('No ClientSecret for google provider set');
+    throw new Error('Missing GOOGLE_CLIENT_SECRET');
   }
 
   return { clientId, clientSecret };
@@ -32,7 +31,6 @@ export const authOptions: NextAuthOptions = {
       clientSecret: getGoogleCredentials().clientSecret,
     }),
   ],
-
   callbacks: {
     async session({ token, session }) {
       if (token) {
@@ -44,7 +42,6 @@ export const authOptions: NextAuthOptions = {
 
       return session;
     },
-
     async jwt({ token, user }) {
       const dbUser = await db.user.findFirst({
         where: {
@@ -64,7 +61,6 @@ export const authOptions: NextAuthOptions = {
         picture: dbUser.image,
       };
     },
-
     redirect() {
       return '/dashboard';
     },
