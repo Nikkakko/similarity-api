@@ -1,11 +1,12 @@
 import { authOptions } from '@/lib/auth';
 import { db } from '@/lib/db';
-import { CreateApiData } from '@/types/api';
+
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 import { nanoid } from 'nanoid';
 import { z } from 'zod';
 import { withMethods } from '@/lib/api-middlewares/with-methods';
+import { CreateApiData } from '@/types/api/key';
 
 const handler = async (
   req: NextApiRequest,

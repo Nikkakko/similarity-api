@@ -1,4 +1,5 @@
-import { type ZodIssue } from 'zod';
+import { ApiKey } from '@prisma/client';
+import { ZodIssue } from 'zod';
 
 export interface CreateApiData {
   error: string | ZodIssue[] | null;
