@@ -1,5 +1,5 @@
 'use client';
-import { FC, FormEvent, useState } from 'react';
+import { FC, FormEvent, SetStateAction, useState } from 'react';
 import { toast } from './ui/Toast';
 import { createApiKey } from '@/helpers/create-api-key';
 import { Key } from 'lucide-react';
@@ -22,6 +22,7 @@ const RequestApiKey: FC<RequestApiKeyProps> = ({}) => {
     try {
       const generatedApiKey = await createApiKey();
 
+      //@ts-ignore
       setApiKey(generatedApiKey);
     } catch (error) {
       if (error instanceof Error) {
